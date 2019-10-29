@@ -35,6 +35,8 @@ body {
 
 .button {
     width: 73px;
+    cursor: pointer;
+    height: 41px;
 }
 
 .bigbutton {

@@ -18,6 +18,19 @@
      return a / b;
  }
 
+ let percent = function(a, b) {
+     return (100 * b) / a;
+ }
+
+ let sqrt = function(a) {
+     return Math.sqrt(Number(a))
+ }
+
+ let pow = function(a, b) {
+     return a ** b
+ }
+
+
  let equals = function() {
      if (inputs[1] === '+') {
          let sum = add(parseFloat(inputs[0]), parseFloat(inputs[2]))
@@ -35,16 +48,30 @@
          let quotient = devide(parseFloat(inputs[0]), parseFloat(inputs[2]));
          clear();
          values.push(quotient)
+     } else if (inputs[1] === '%') { /////sdasdasdasd
+         let perc = percent(parseFloat(inputs[0]), parseFloat(inputs[2]));
+         clear();
+         values.push(perc)
+         display();
+     } else if (inputs[1] === '√') { /////sdasdasdasd
+         let sqrts = sqrt(parseFloat(inputs[0]));
+         clear();
+         values.push(sqrt)
+         display();
+     } else if (inputs[1] === 'x**2') { /////sdasdasdasd
+         let quotient = devide(parseFloat(inputs[0]), parseFloat(inputs[2]));
+         clear();
+         values.push(quotient)
+         display();
      }
      display();
  }
-
  let update = function(value) {
      inputs.push(value);
      inputs.shift();
  }
 
- let clear = function() {
+ var clear = function() {
      inputs = ['', '', ''];
      values = [];
      display();
