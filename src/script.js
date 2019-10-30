@@ -30,46 +30,47 @@
      return a ** b
  }
 
+ let update = function(value) {
+     inputs.push(value);
+     inputs.shift();
+ }
 
  let equals = function() {
      if (inputs[1] === '+') {
-         let sum = add(parseFloat(inputs[0]), parseFloat(inputs[2]))
+         let sum = add(parseFloat(inputs[0]), parseFloat(inputs[2])).toPrecision(1);
          clear();
          values.push(sum);
      } else if (inputs[1] === '-') {
-         let difference = substract(parseFloat(inputs[0]), parseFloat(inputs[2]));
+         let difference = substract(parseFloat(inputs[0]), parseFloat(inputs[2])).toPrecision(1);
          clear();
          values.push(difference);
      } else if (inputs[1] === '*') {
-         let product = multiply(parseFloat(inputs[0]), parseFloat(inputs[2]));
+         let product = multiply(parseFloat(inputs[0]), parseFloat(inputs[2])).toPrecision(1);
          clear();
          values.push(product);
      } else if (inputs[1] === '/') {
-         let quotient = devide(parseFloat(inputs[0]), parseFloat(inputs[2]));
+         let quotient = devide(parseFloat(inputs[0]), parseFloat(inputs[2])).toPrecision(1);
          clear();
-         values.push(quotient)
+         values.push(inputs[2] == 0 ? 'Error' : quotient)
      } else if (inputs[1] === '%') { /////sdasdasdasd
-         let perc = percent(parseFloat(inputs[0]), parseFloat(inputs[2]));
+         let perc = percent(parseFloat(inputs[0]), parseFloat(inputs[2])).toPrecision(1);
          clear();
          values.push(perc)
          display();
      } else if (inputs[0] === '√') { /////sdasdasdasd
-         let sqrts = sqrt(parseFloat(inputs[1]));
+         let sqrts = sqrt(parseFloat(inputs[1])).toPrecision(1);
          clear();
          values.push(sqrts)
          display();
      } else if (inputs[1] === 'x^2') { /////sdasdasdasd
-         let pows = pow(parseFloat(inputs[0]), parseFloat(inputs[2]));
+         let pows = pow(parseFloat(inputs[0]).toPrecision(12), parseFloat(inputs[2]).toPrecision(12));
          clear();
          values.push(pows)
          display();
      }
      display();
  }
- let update = function(value) {
-     inputs.push(value);
-     inputs.shift();
- }
+
 
  let clear = function() {
      inputs = ["", "", ""];
@@ -95,6 +96,10 @@
      }
  }
 
+ if (results < 1) {
+     results.value.toFixed(1);
+ }
+
  for (let i = 0; i < 11; i++) {
      document.getElementById(i).addEventListener("click", function() {
          values.push(this.innerHTML);
@@ -102,7 +107,7 @@
      })
  }
 
- for (let i = 11; i < 15; i++) {
+ for (let i = 11; i < 19; i++) {
      document.getElementById(i).addEventListener("click", function() {
          update(values.join(""));
          update(this.innerHTML);
@@ -111,17 +116,17 @@
      })
  }
 
- document.getElementById(15).addEventListener("click", function() {
+ document.getElementById(19).addEventListener("click", function() {
      update(values.join(""));
      values = [];
      equals();
  })
 
- document.getElementById(16).addEventListener("click", function() {
+ document.getElementById(20).addEventListener("click", function() {
      clear();
  })
 
- document.getElementById(17).addEventListener("click", function() {
+ document.getElementById(21).addEventListener("click", function() {
      del();
      display();
  })
@@ -131,12 +136,12 @@
      if ((event.keyCode > 47) && (event.keyCode < 58)) {
          values.push(event.keyCode - 48);
      } else if ((event.keyCode > 95) && (event.keyCode < 106)) {
-         values.push(event.keyCode - 95);
-     } else if (event.keyCode == 106) {
+         values.push(event.keyCode - 96);
+     } else if (event.keyCode === 106) {
          update(values.join(""));
          update("*");
          values = [];
-     } else if (event.keyCode == 107) {
+     } else if (event.keyCode === 107) {
          update(values.join(""));
          update("+");
          values = [];
@@ -155,4 +160,5 @@
          values = [];
          equals();
      }
- })
+     display();
+ });
