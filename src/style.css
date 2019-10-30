@@ -17,7 +17,7 @@ body {
 
 #display,
 .button,
-.bigbutton {
+.big-button {
     border-width: 2px;
     border-color: #000;
     border-style: solid;
@@ -28,7 +28,7 @@ body {
 }
 
 .button:hover,
-.bigbutton:hover {
+.big-button:hover {
     color: #fff;
     background-color: #000;
 }
@@ -39,7 +39,11 @@ body {
     height: 41px;
 }
 
-.bigbutton {
+.big-button {
+    cursor: pointer;
+}
+
+.big-button {
     width: 164px;
 }
 

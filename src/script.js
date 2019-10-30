@@ -19,7 +19,7 @@
  }
 
  let percent = function(a, b) {
-     return (100 * b) / a;
+     return (100 * a) / b;
  }
 
  let sqrt = function(a) {
@@ -53,15 +53,15 @@
          clear();
          values.push(perc)
          display();
-     } else if (inputs[1] === '√') { /////sdasdasdasd
-         let sqrts = sqrt(parseFloat(inputs[0]));
+     } else if (inputs[0] === '√') { /////sdasdasdasd
+         let sqrts = sqrt(parseFloat(inputs[1]));
          clear();
-         values.push(sqrt)
+         values.push(sqrts)
          display();
-     } else if (inputs[1] === 'x**2') { /////sdasdasdasd
-         let quotient = devide(parseFloat(inputs[0]), parseFloat(inputs[2]));
+     } else if (inputs[1] === 'x^2') { /////sdasdasdasd
+         let pows = pow(parseFloat(inputs[0]), parseFloat(inputs[2]));
          clear();
-         values.push(quotient)
+         values.push(pows)
          display();
      }
      display();
@@ -71,8 +71,8 @@
      inputs.shift();
  }
 
- var clear = function() {
-     inputs = ['', '', ''];
+ let clear = function() {
+     inputs = ["", "", ""];
      values = [];
      display();
  }
@@ -124,4 +124,35 @@
  document.getElementById(17).addEventListener("click", function() {
      del();
      display();
+ })
+
+
+ document.addEventListener('keydown', function(event) {
+     if ((event.keyCode > 47) && (event.keyCode < 58)) {
+         values.push(event.keyCode - 48);
+     } else if ((event.keyCode > 95) && (event.keyCode < 106)) {
+         values.push(event.keyCode - 95);
+     } else if (event.keyCode == 106) {
+         update(values.join(""));
+         update("*");
+         values = [];
+     } else if (event.keyCode == 107) {
+         update(values.join(""));
+         update("+");
+         values = [];
+     } else if (event.keyCode === 109) {
+         update(values.join(""));
+         update("-");
+         values = [];
+     } else if (event.keyCode === 110) {
+         values.push(".");
+     } else if (event.keyCode === 111) {
+         update(values.join(""));
+         update("/");
+         values = [];
+     } else if (event.keyCode === 12 || 13) {
+         update(values.join(""));
+         values = [];
+         equals();
+     }
  })
